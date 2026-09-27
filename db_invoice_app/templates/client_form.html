@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if client else "Add" }} Client - Invoice Tracker{% endblock %}
+{% block content %}
+
+<h2>{{ "Edit" if client else "Add" }} Client</h2>
+
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+
+<form method="post" class="form">
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" required value="{{ form.name if form else '' }}">
+
+  {% if client %}
+    <label>Client ID</label>
+    <input type="text" value="{{ client.client_id }}" disabled>
+    <p class="hint">Client ID can't be changed — it's baked into past invoice numbers.</p>
+  {% else %}
+    <label for="client_id">Client ID (4 digits, used as the invoice prefix)</label>
+    <input type="text" name="client_id" id="client_id" pattern="\d{4}" maxlength="4" required value="{{ form.client_id if form else '' }}">
+  {% endif %}
+
+  <label for="monthly_subscription">Monthly subscription charge (leave blank if none)</label>
+  <input type="number" step="0.01" name="monthly_subscription" id="monthly_subscription" value="{{ form.monthly_subscription if form and form.monthly_subscription else '' }}">
+
+  <label for="email">Email</label>
+  <input type="email" name="email" id="email" value="{{ form.email if form else '' }}">
+
+  <label for="notes">Notes</label>
+  <textarea name="notes" id="notes">{{ form.notes if form else '' }}</textarea>
+
+  <button type="submit">{{ "Save" if client else "Add client" }}</button>
+</form>
+
+{% endblock %}

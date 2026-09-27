@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Invoice Tracker{% endblock %}
+{% block content %}
+
+<section class="totals">
+  <div class="stat">
+    <span class="label">Outstanding</span>
+    <span class="value">{{ totals.outstanding|money }}</span>
+  </div>
+  <div class="stat paid">
+    <span class="label">Paid</span>
+    <span class="value">{{ totals.paid|money }}</span>
+  </div>
+  <div class="stat client-total">
+    <span class="label">Monthly recurring revenue</span>
+    <span class="value">{{ monthly_recurring|money }}</span>
+  </div>
+  {% if client_total %}
+  <div class="stat client-total">
+    <span class="label">{{ client_total.name }} — total invoiced</span>
+    <span class="value">{{ client_total.total|money }}</span>
+  </div>
+  {% if client_total.monthly_subscription %}
+  <div class="stat client-total">
+    <span class="label">{{ client_total.name }} — monthly sub.</span>
+    <span class="value">{{ client_total.monthly_subscription|money }}</span>
+  </div>
+  {% endif %}
+  {% endif %}
+</section>
+
+<form class="filters" method="get">
+  <select name="client_id" onchange="this.form.submit()">
+    <option value="">All clients</option>
+    {% for c in clients %}
+      <option value="{{ c.id }}" {% if client_filter|string == c.id|string %}selected{% endif %}>{{ c.client_id }} — {{ c.name }}</option>
+    {% endfor %}
+  </select>
+  <select name="status" onchange="this.form.submit()">
+    <option value="">All statuses</option>
+    {% for s in ["draft", "sent", "paid", "overdue", "cancelled"] %}
+      <option value="{{ s }}" {% if status_filter == s %}selected{% endif %}>{{ s }}</option>
+    {% endfor %}
+  </select>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invoice #</th>
+      <th>Client</th>
+      <th>Sent</th>
+      <th>Due</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for inv in invoices %}
+    <tr class="status-{{ inv.status }}{% if inv.status in ('sent',) and inv.due_date and inv.due_date < today %} status-overdue{% endif %}">
+      <td>{{ inv.invoice_number }}</td>
+      <td>{{ inv.client_name }}</td>
+      <td>{{ inv.date_sent }}</td>
+      <td>{{ inv.due_date or "-" }}</td>
+      <td>{{ inv.currency }} {{ inv.amount|money }}</td>
+      <td><span class="badge">{{ inv.status }}</span></td>
+      <td class="actions">
+        <a href="{{ url_for('edit_invoice', invoice_id=inv.id) }}">Edit</a>
+        {% if inv.status != 'paid' %}
+        <form method="post" action="{{ url_for('mark_paid', invoice_id=inv.id) }}" class="inline">
+          <button type="submit">Mark paid</button>
+        </form>
+        {% endif %}
+        <form method="post" action="{{ url_for('delete_invoice', invoice_id=inv.id) }}" class="inline" onsubmit="return confirm('Delete this invoice?')">
+          <button type="submit" class="danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7" class="empty">No invoices yet. <a href="{{ url_for('add_invoice') }}">Add one</a>.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

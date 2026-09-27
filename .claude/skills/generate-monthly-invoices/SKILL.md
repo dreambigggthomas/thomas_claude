@@ -16,6 +16,7 @@ Task Progress:
 - [ ] 3. Build the invoices
 - [ ] 4. Confirm with the user
 - [ ] 5. Update the invoice-number state
+- [ ] 6. Log the run in the invoice tracker
 ```
 
 ### 1. Get the billing month and invoice date
@@ -28,10 +29,13 @@ Read `references/clients.md`. For each of the 5 clients, take "Last suffix used"
 Follow `references/build-invoice.md` to turn the computed data into `.docx` files via `scripts/generate.js`.
 
 ### 4. Confirm with the user
-Show a summary table (client, invoice number, total, file path) and ask the user to open and check each file. Do not treat the run as final until they confirm — this is the checkpoint before the invoice-number state changes.
+Show a summary table (client, invoice number, total, file path), plus a grand total across all invoices in the run, and ask the user to open and check each file. Do not treat the run as final until they confirm — this is the checkpoint before the invoice-number state changes.
 
 ### 5. Update the invoice-number state
 Once confirmed, edit `references/clients.md` and set each client's "Last suffix used" to the number just issued, so next month continues from the right place.
+
+### 6. Log the run in the invoice tracker
+Run `python3 <db_invoice_app-dir>/import_invoice_run.py <input.json>`, reusing the same `input.json` built in step 3 (don't delete it before this step). `<db_invoice_app-dir>` is `/Users/thomasho/Documents/thomas_claude/db_invoice_app`. This inserts or updates one row per client in the local invoice-tracker SQLite DB (status "sent"), so `db_invoice_app`'s dashboard stays in sync without manual re-entry. It's safe to rerun — it updates existing rows by client + invoice number instead of duplicating them, and never overwrites a status the user already changed (e.g. "paid") in the tracker.
 
 ## Human checkpoints
 Step 4 is required before step 5. Never advance the stored invoice numbers on unconfirmed output — a rerun after a correction must reuse the same invoice number, not skip ahead.
@@ -48,3 +52,4 @@ This skill is never finished. Improve it as you use it.
 |------|-----------|
 | 2 | `references/clients.md` |
 | 3 | `references/build-invoice.md` |
+| 6 | `/Users/thomasho/Documents/thomas_claude/db_invoice_app/import_invoice_run.py` |
