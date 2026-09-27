@@ -10,7 +10,7 @@ Write a temp JSON file (anywhere, e.g. the OS temp dir) shaped like this, one en
 
 ```json
 {
-  "outputRoot": "./clients",
+  "outputRoot": "<the output root from references/clients.md>",
   "invoices": [
     {
       "client": "Thunder Thor Limited",

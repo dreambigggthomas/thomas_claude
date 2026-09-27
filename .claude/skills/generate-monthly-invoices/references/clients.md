@@ -4,7 +4,7 @@ One purpose: per-client billing data and the running invoice-number state. Read 
 
 Company constants (same on every invoice, set in scripts/make_invoice.js): Dreambiggg Co. Ltd. | info@dreambiggg.app | www.dreambiggg.app | HSBC 652-298985-838.
 
-Output folder for each client = the exact "Folder name" below, under the output root (default `./clients`, relative to wherever this skill is run — confirm the root with the user the first time, then keep using it).
+Output root: `/Users/thomasho/Documents/Google_Drive_Backup/All invoices` (fixed absolute path, syncs to Google Drive — do not use a path relative to the current working directory). Output folder for each client = the exact "Folder name" below, created directly under this root.
 
 Some line items contain a `{MONTH}` placeholder. Replace it with the billing month in the exact case style shown (e.g. "Oct 2026" vs "OCT 2026") — each client keeps its own historical style, do not standardize across clients.
 
