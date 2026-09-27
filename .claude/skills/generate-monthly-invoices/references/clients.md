@@ -32,7 +32,6 @@ Some line items contain a `{MONTH}` placeholder. Replace it with the billing mon
 - Line items:
   1. `{MONTH} Monthly Subscription Fee\n(2 shop x $600 each) Plus 2 freelance shop $200` — HK$1,400.00
 - Total: HK$1,400.00
-- Note: `{MONTH}` here is upper case (e.g. "OCT 2026"), unlike other clients.
 
 ## Charles Heica Service Company Ltd.
 - Folder name: `Charles Heica Service Company Ltd`

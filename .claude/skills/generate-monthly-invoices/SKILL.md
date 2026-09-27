@@ -22,7 +22,7 @@ Task Progress:
 Ask the user which month is being billed, unless they already said it. Default invoice date is the 27th of the month before the billing month (matches this company's pattern of invoicing in advance) — confirm this default rather than assuming silently the first time.
 
 ### 2. Read client data and compute next invoice numbers
-Read `references/clients.md`. For each of the 5 clients, take "Last suffix used" + 1 as the new invoice number suffix (e.g. `03` -> `04`), and substitute the billing month into any `{MONTH}` / `{Month}` / `{MONTH_NUM}` / `{YEAR}` placeholder in that client's line items, matching the exact capitalization style already noted for that client.
+Read `references/clients.md`. For each of the 5 clients, take "Last suffix used" + 1 as the new invoice number suffix (e.g. `03` -> `04`), and substitute the billing month into any placeholder in that client's line items. The placeholder's own casing is the instruction, nothing else to check: `{MONTH}` -> full caps (e.g. "NOV 2026"), `{Month}` -> title case (e.g. "Nov 2026"), `{MONTH_NUM}` -> the numeric month (e.g. "11"), `{YEAR}` -> the 4-digit year.
 
 ### 3. Build the invoices
 Follow `references/build-invoice.md` to turn the computed data into `.docx` files via `scripts/generate.js`.
