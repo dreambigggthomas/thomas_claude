@@ -59,6 +59,17 @@ Some line items contain a `{MONTH}` placeholder. Replace it with the billing mon
 - Total: HK$3,050.00
 - `{YEAR}` = the 4-digit billing year, `{MONTH_NUM}` = the month number (e.g. 10 for October).
 
+## Miro (Trillion International Clothing co. ltd)
+- Folder name: `Miro`
+- Invoice prefix: `1050`
+- Last suffix used: `35`
+- Bill To lines:
+  - Trillion International Clothing co. ltd
+  - 香港九龍長沙灣永康街9號 地下G02號舖
+- Line items:
+  1. `MPOS {MONTH} Monthly Subscription Fee\n(10 x HK$960.00)` — HK$9,600.00
+- Total: HK$9,600.00
+
 ## Joinmax Display & Productions Ltd
 - Folder name: `Joinmax Display & Productions Ltd`
 - Invoice prefix: `1100`
