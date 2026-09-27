@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+invoices.db
+config.py
+research_notes/
+reports/

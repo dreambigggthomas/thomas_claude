@@ -1,0 +1,8 @@
+# Copy this file to config.py (git-ignored, never committed) and fill in
+# real values. Generate them with:
+#
+#   python3 -c "import secrets; print(secrets.token_hex(32))"
+#   python3 -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('your-chosen-password'))"
+
+SECRET_KEY = "replace-with-output-of-secrets.token_hex(32)"
+PASSWORD_HASH = "replace-with-output-of-generate_password_hash(...)"

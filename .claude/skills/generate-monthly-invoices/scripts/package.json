@@ -1,0 +1,7 @@
+{
+  "name": "generate-monthly-invoices-scripts",
+  "private": true,
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}

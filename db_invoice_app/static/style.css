@@ -1,0 +1,156 @@
+:root {
+  --bg: #f7f7f5;
+  --card: #ffffff;
+  --border: #e3e2de;
+  --text: #23221f;
+  --muted: #75726b;
+  --accent: #b3541e;
+  --paid: #2f6b3a;
+  --overdue: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 { font-size: 1.1rem; margin: 0; }
+header h1 a { color: var(--text); text-decoration: none; }
+
+nav a {
+  margin-left: 1.25rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+nav a:hover { color: var(--accent); }
+
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.totals {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  min-width: 160px;
+}
+.stat .label { display: block; color: var(--muted); font-size: 0.8rem; }
+.stat .value { display: block; font-size: 1.5rem; font-weight: 600; color: var(--overdue); }
+.stat.paid .value { color: var(--paid); }
+.stat.client-total .value { color: var(--accent); }
+
+.filters {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.filters select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+th { color: var(--muted); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
+
+tr.status-overdue .badge { background: #fbe4e1; color: var(--overdue); }
+tr.status-paid .badge { background: #e3efe4; color: var(--paid); }
+.badge {
+  background: #f0eee9;
+  color: var(--muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.actions { display: flex; gap: 0.5rem; align-items: center; }
+.actions form.inline { display: inline; }
+.actions a, .actions button {
+  font-size: 0.8rem;
+  border: none;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+}
+.actions button.danger { color: var(--overdue); }
+
+.empty { text-align: center; color: var(--muted); padding: 2rem 0; }
+
+.error {
+  background: #fbe4e1;
+  color: var(--overdue);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  max-width: 420px;
+  font-size: 0.9rem;
+}
+
+.hint { font-size: 0.8rem; color: var(--muted); max-width: 420px; }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.form label { font-size: 0.8rem; color: var(--muted); margin-top: 0.75rem; }
+.form input, .form select, .form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.form button {
+  margin-top: 1.25rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
